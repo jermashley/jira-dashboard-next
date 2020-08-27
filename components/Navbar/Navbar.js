@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { ThemeContext } from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -18,6 +20,7 @@ import {
 
 library.add(faClipboardListCheck, faServer, faRocketLaunch, faSignOut)
 
+/* eslint-disable */
 function debounce(fn, ms) {
   let timer
   return (_) => {
@@ -28,8 +31,11 @@ function debounce(fn, ms) {
     }, ms)
   }
 }
+/* eslint-enable */
 
 const Navbar = () => {
+  const router = useRouter()
+
   const themeContext = useContext(ThemeContext)
   const [navbarToggle, setNavbarToggle] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
@@ -53,11 +59,13 @@ const Navbar = () => {
       window.addEventListener(`resize`, debouncedHandleResize)
     }
 
+    /* eslint-disable */
     return (_) => {
       if (process.browser) {
         window.removeEventListener(`resize`, debouncedHandleResize)
       }
     }
+    /* eslint-enable */
   })
 
   const navbarHeight = () => {
@@ -88,7 +96,7 @@ const Navbar = () => {
       {dimensions.width <= parseFloat(themeContext.screens.lg) ? (
         <MobileNavbarContentWrapper>
           <div className="flex flex-col items-start justify-start leading-none">
-            <span className="font-semibold text-gray-800" style={{ fontSize: `0.8125rem` }}>
+            <span className="mb-1 font-semibold text-gray-800" style={{ fontSize: `0.8125rem` }}>
               Prologue Technology
             </span>
             <span className="font-semibold text-gray-700" style={{ fontSize: `0.625rem` }}>
@@ -115,20 +123,26 @@ const Navbar = () => {
         }}
       >
         <NavbarLinkGroup fullWidth={!isDesktop}>
-          <NavbarLink isActive>
-            <FontAwesomeIcon icon={[`fad`, `clipboard-list-check`]} fixedWidth />
-            <span>Tickets</span>
-          </NavbarLink>
+          <Link href="/issues">
+            <NavbarLink isActive={router.pathname === `/issues`}>
+              <FontAwesomeIcon icon={[`fad`, `clipboard-list-check`]} fixedWidth />
+              <span>Tickets</span>
+            </NavbarLink>
+          </Link>
 
-          <NavbarLink>
-            <FontAwesomeIcon icon={[`fad`, `server`]} fixedWidth />
-            <span>Servers</span>
-          </NavbarLink>
+          <Link href="/servers">
+            <NavbarLink isActive={router.pathname === `/servers`}>
+              <FontAwesomeIcon icon={[`fad`, `server`]} fixedWidth />
+              <span>Servers</span>
+            </NavbarLink>
+          </Link>
 
-          <NavbarLink>
-            <FontAwesomeIcon icon={[`fad`, `rocket-launch`]} fixedWidth />
-            <span>Deployments</span>
-          </NavbarLink>
+          <Link href="/deployments">
+            <NavbarLink isActive={router.pathname === `/deployments`}>
+              <FontAwesomeIcon icon={[`fad`, `rocket-launch`]} fixedWidth />
+              <span>Deployments</span>
+            </NavbarLink>
+          </Link>
         </NavbarLinkGroup>
 
         {!isDesktop ? <hr className="w-full my-4 border-gray-300" /> : null}

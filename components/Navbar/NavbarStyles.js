@@ -19,6 +19,10 @@ export const NavbarWrapper = styled.nav`
     left: 0;
     box-shadow: none;
   }
+
+  @media screen and (max-width: ${(props) => props.theme.screens.lg}) {
+    ${tw`w-screen`}
+  }
 `
 
 export const MobileNavbarContentWrapper = styled.section`
@@ -42,6 +46,8 @@ export const NavbarLink = styled.a`
   ${tw`relative flex flex-row items-center justify-start text-xs rounded`}
   width: min-content;
   padding: 0.625rem;
+  transition: all 300ms cubic-bezier(0.395, 0.705, 0.240, 1.000);
+
   color: ${(props) =>
     props.isActive
       ? props.theme.colors.white

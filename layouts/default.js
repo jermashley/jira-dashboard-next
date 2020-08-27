@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar/Navbar'
 const DefaultLayoutWrapper = styled.main`
   ${tw`w-full h-full max-w-full max-h-full min-w-full min-h-full overflow-hidden`}
   display: grid;
-  grid-template-columns: 4.625rem 1fr auto;
+  grid-template-columns: 4.625rem minmax(auto, 64rem) auto;
   grid-gap: 2rem;
   min-height: -webkit-fill-available;
 

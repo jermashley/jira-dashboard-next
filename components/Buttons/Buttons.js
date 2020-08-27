@@ -6,10 +6,10 @@ library.add(faAngleDown, faAngleUp)
 
 const gridStyles = (reverse) => {
   const styles = {
-    display: `grid`,
-    gridAutoColumns: `min-content`,
-    gridTemplateAreas: !reverse ? `'icon text'` : `'text icon'`,
-    gridGap: `0.5rem`,
+    display: `flex`,
+    flexFlow: `row nowrap`,
+    justifyContent: `center`,
+    alignItems: `center`,
   }
 
   return styles
@@ -23,9 +23,11 @@ export const DefaultButton = ({ type, icon, text, color, reverse, onClick }) => 
       style={gridStyles(reverse)}
       onClick={onClick}
     >
-      <span style={{ gridArea: `icon` }}>
-        <FontAwesomeIcon icon={[`far`, icon]} className={`fill-current text-${color}-700`} />
-      </span>
+      {icon ? (
+        <span style={{ gridArea: `icon` }} className={`m${reverse ? `l` : `r`}-2`}>
+          <FontAwesomeIcon icon={[`far`, icon]} className={`fill-current text-${color}-700`} />
+        </span>
+      ) : null}
 
       <span style={{ gridArea: `text` }}>{text}</span>
     </button>
