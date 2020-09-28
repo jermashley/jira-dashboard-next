@@ -10,9 +10,9 @@ const IssueCard = () => {
   return useObserver(() => (
     <>
       <ul>
-        {issueStore.issues.map((issue) => (
-          <li key={issue.key}>{issue.key}</li>
-        ))}
+        {issueStore.issues !== undefined
+          ? issueStore.issues.map((issue) => <li key={issue.key}>{issue.key}</li>)
+          : `No issues to display`}
       </ul>
     </>
   ))
