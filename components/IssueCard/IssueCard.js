@@ -5,7 +5,7 @@ const IssueCard = () => {
   const issueStore = useIssueStore()
 
   if (issueStore.isLoading) return useObserver(() => issueStore.isLoadingString)
-  if (issueStore.isLoading) return useObserver(() => issueStore.isLoadingString)
+  if (issueStore.isError) return useObserver(() => issueStore.isErrorString)
 
   return useObserver(() => (
     <>
